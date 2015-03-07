@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Ponto Simples</string>
+    <string name="action_settings">Configurações</string>
+    <string name="title_section1">Registro</string>
+    <string name="title_section2">Histórico</string>
+    <string name="title_section3">...</string>
+    <string name="hora_ponto_mascara">__:__</string>
+    <string name="hora_ponto_formato">HH:mm</string>
+    <string name="msg_definir_hora_inicio">É preciso definir uma hora de início antes de definir o fim...</string>
+    <string name="msg_definir_hora_fim_menor_inicio">Não pode definir uma hora de fim menor que a hora de início...</string>
+    <string name="msg_lembrete_notificacao">Lembrete agendado para: %s</string>
+    <string name="msg_deseja_incluir_notificacao">Deseja incluir uma nova notificação?</string>
+    <string name="texto_botao_sim">Sim</string>
+    <string name="texto_botao_nao">Não</string>
+    
+
+</resources>

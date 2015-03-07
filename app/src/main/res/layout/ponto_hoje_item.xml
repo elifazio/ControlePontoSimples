@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"  >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tvHoraInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"            
+            android:text="00:00"
+            android:textAppearance="@style/textAppearanceLargePonto" />
+        
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center_vertical"
+            android:text="-"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tvHoraFim"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="00:00"
+            android:textAppearance="@style/textAppearanceLargePonto" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical" >
+        
+        <TextView
+            android:id="@+id/tvHoraTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hora_ponto_mascara"
+            android:textAppearance="@style/textAppearanceSmallPonto" />
+    </LinearLayout>
+
+</LinearLayout>
