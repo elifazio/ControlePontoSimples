@@ -3,10 +3,19 @@ package br.com.controlepontosimples.bll;
 import java.util.List;
 
 import android.content.Context;
+import android.preference.PreferenceManager;
+
+import org.joda.time.DateTime;
+import org.joda.time.LocalTime;
+import org.joda.time.MutableDateTime;
+
+import br.com.controlepontosimples.ConfiguracoesActivity;
+import br.com.controlepontosimples.R;
 import br.com.controlepontosimples.dal.LembreteDAL;
 import br.com.controlepontosimples.lembrete.ReminderManager;
 import br.com.controlepontosimples.model.LembreteItem;
 import br.com.controlepontosimples.model.PontoItem;
+import br.com.controlepontosimples.util.PontoUtil;
 
 public class LembreteBLL {
 
@@ -57,5 +66,49 @@ public class LembreteBLL {
 		}
 		return false;
 	}
+
+    /*
+    Cria um lembrete para notificar o usuário para a volta do almoço. O tempo do intervalo usado será o parametrizado nas configurações
+     */
+    public boolean criarLembreteAlmoco(PontoItem ponto) {
+        LembreteItem novoLembrete = new LembreteItem();
+        novoLembrete.setCodigoPonto(ponto.getId());
+
+        DateTime dtLembrete;
+        if (ponto.getDataPontoFim() != null) {
+            dtLembrete = new DateTime(ponto.getDataPontoFim());
+        } else {
+            dtLembrete = new DateTime(ponto.getDataPontoInicio());
+        }
+
+        int intervaloAlmoco = Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(this.ctx).getString(ConfiguracoesActivity.KEY_PREF_INTERVALO_ALMOCO, this.ctx.getResources().getString(R.string.pref_intervalo_almoco_default_value)));
+        novoLembrete.setDataLembrete(dtLembrete.plusHours(intervaloAlmoco).getMillis());
+
+        return this.saveLembrete(novoLembrete);
+    }
+
+    /*
+    Verdadeiro se o ponto está no intervalo de almoço.
+     */
+    public boolean isIntervaloAlmoco(PontoItem ponto) {
+        String horaMinutoInicioAlmoco = PreferenceManager.getDefaultSharedPreferences(this.ctx).getString(ConfiguracoesActivity.KEY_PREF_HORA_INICIO_ALMOCO, this.ctx.getResources().getString(R.string.pref_hora_inicio_almoco_default_value));
+
+        LocalTime ltInicioAlmoco = PontoUtil.convertHoraMinutoJodaTime(horaMinutoInicioAlmoco);
+        MutableDateTime mdtInicioAlmoco = new MutableDateTime();
+        mdtInicioAlmoco.setHourOfDay(ltInicioAlmoco.getHourOfDay());
+        mdtInicioAlmoco.setMinuteOfHour(ltInicioAlmoco.getMinuteOfHour());
+
+        // remove alguns minutos do horário de início par aumentar a janela para detectar que está no intervalo de almoço
+        mdtInicioAlmoco.addMinutes(-10);
+
+        DateTime dtPontoFim = new DateTime(ponto.getDataPontoFim());
+
+        int intervaloAlmoco = Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(this.ctx).getString(ConfiguracoesActivity.KEY_PREF_INTERVALO_ALMOCO, this.ctx.getResources().getString(R.string.pref_intervalo_almoco_default_value)));
+
+        MutableDateTime dtPontoFimIntervaloAlmoco = new MutableDateTime(mdtInicioAlmoco);
+        dtPontoFimIntervaloAlmoco.addHours(intervaloAlmoco);
+
+        return dtPontoFim.isAfter(mdtInicioAlmoco) & dtPontoFim.isBefore(dtPontoFimIntervaloAlmoco);
+    }
 
 }

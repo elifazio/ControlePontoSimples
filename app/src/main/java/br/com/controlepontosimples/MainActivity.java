@@ -1,11 +1,15 @@
 package br.com.controlepontosimples;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -39,6 +43,9 @@ public class MainActivity extends FragmentActivity implements
 								getString(R.string.title_section1),
 								getString(R.string.title_section2),
 								getString(R.string.title_section3), }), this);
+
+        // carrega os valores padrões das configurações
+        PreferenceManager.setDefaultValues(this, R.layout.activity_configuracoes, false);
 	}
 
 	@Override
@@ -64,7 +71,16 @@ public class MainActivity extends FragmentActivity implements
 		return true;
 	}
 
-	@Override
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_settings) {
+            Intent i = new Intent(this, ConfiguracoesActivity.class);
+            this.startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
 	public boolean onNavigationItemSelected(int position, long id) {
 		// When the given dropdown item is selected, show its contents in the
 		// container view.
