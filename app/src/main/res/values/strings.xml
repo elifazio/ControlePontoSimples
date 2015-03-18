@@ -11,9 +11,39 @@
     <string name="msg_definir_hora_inicio">É preciso definir uma hora de início antes de definir o fim...</string>
     <string name="msg_definir_hora_fim_menor_inicio">Não pode definir uma hora de fim menor que a hora de início...</string>
     <string name="msg_lembrete_notificacao">Lembrete agendado para: %s</string>
+    <string name="msg_confirmacao_lembrete">Lembrete agendado com sucesso!</string>
     <string name="msg_deseja_incluir_notificacao">Deseja incluir uma nova notificação?</string>
     <string name="texto_botao_sim">Sim</string>
     <string name="texto_botao_nao">Não</string>
+    <string name="texto_botao_ok">Ok</string>
+    <string name="texto_botao_cancelar">Cancelar</string>
+
+    <string name="pref_summary_hora_inicio_almoco">@string/pref_hora_inicio_almoco_default_value</string>
+    <string name="pref_title_hora_inicio_almoco">Horário início do almoço</string>
+    <string name="pref_hora_inicio_almoco_default_value">12:00</string>
+
+
+    <string name="pref_title_intervalo_almoco">Intervalo de almoço</string>
+    <string name="pref_intervalo_almoco_default_value">1</string>
+    <string-array name="pref_intevalo_almoco_list_titles">
+        <item>1 hora</item>
+        <item>2 horas</item>
+    </string-array>
+    <string-array name="pref_intevalo_almoco_list_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+
+    <!-- Example settings for Notifications -->
+    <!--<string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>-->
     
 
 </resources>
